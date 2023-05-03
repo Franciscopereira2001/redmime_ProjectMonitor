@@ -26,6 +26,11 @@ class Redmine
      */
     private $is_public;
 
+    public function __construct()
+    {
+        // construtor vazio
+    }
+
     /**
      * @return mixed
      */

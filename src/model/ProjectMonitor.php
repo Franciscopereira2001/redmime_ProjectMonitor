@@ -34,6 +34,11 @@ class ProjectMonitor
      */
     private $key;
 
+    public function __construct()
+    {
+
+    }
+
     /**
      * @return mixed
      */
@@ -114,6 +119,8 @@ class ProjectMonitor
     {
         $this->key = $key;
     }
+
+
 
 
 }
