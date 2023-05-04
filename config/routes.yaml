@@ -6,4 +6,4 @@ controllers:
 
 api_create_project:
     path: /create-project
-    controller: App\Controller\ApiController::createProject
+    controller: App\Controller\ApiController::randomName

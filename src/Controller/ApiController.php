@@ -6,37 +6,26 @@ use App\model\ProjectMonitor;
 use App\model\Redmine;
 use App\service\RedmineService;
 use App\service\ProjectMonitorService;
+use Psr\Container\ContainerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 
-class ApiController
+class ApiController extends AbstractController
 {
-
-
-    private $projectMonitorService;
     private $redmineService;
 
-    public function __construct(ProjectMonitorService $projectMonitorService, RedmineService $redmineService)
+
+    public function __construct(RedmineService $redmineService)
     {
-        $this->projectMonitorService = $projectMonitorService;
         $this->redmineService = $redmineService;
     }
 
-    public function createProjectMonitorProjectsInRedmine()
+    public function randomName()
     {
-        //Obtem todos os projetos do Project Monitor
-        $projects = $this->projectMonitorService->getAllProjects();
+       $projects = $this->redmineService->createProjectMonitorProjectsInRedmine();
 
-        foreach ($projects as $project) {
-            $redmineProject = new Redmine();
-            $redmineProject->setName($project->getLibelle());
-            $redmineProject->setDescription($project->getDescription());
-            $redmineProject->setIdentifier($project->getKey());
-            $redmineProject->setIsPublic($project->getActif());
-
-
-            $redmineProject = $this->redmineService->createProject($project);
-
-        }
+       return new Response(json_encode($projects),200);
     }
 
 

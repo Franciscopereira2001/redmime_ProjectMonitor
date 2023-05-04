@@ -2,34 +2,31 @@
 
 namespace App\service;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Model\ProjectMonitor;
+
+use App\model\ProjectMonitor;
+use GuzzleHttp\Client;
+
 
 class ProjectMonitorService
 {
-    private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private $client;
+    private $url;
+
+    public function __construct(string $projectMonitorUrl)
     {
-        $this->entityManager = $entityManager;
+        $this->url = $projectMonitorUrl;
+        $this->client = new Client(['base_uri' => $projectMonitorUrl]);
     }
-
     public function getAllProjects(): array
     {
+        $response = $this->client->get('');
 
-//        $projectMonitorUrl = 'https://pmiredmine2.free.beeceptor.com/projects';
-//
-//        $jsonContent = file_get_contents($projectMonitorUrl);
-//
-//        // Descodifica o JSON em um array associativo
-//        $jsonArray = json_decode($jsonContent, true);
-//
+        //Descodifica o json em um array associativo
+        $arr = json_decode($response->getBody()->getContents());
 
+        return is_array($arr) ? $arr:[];
 
-
-        $repository = $this->entityManager->getRepository(ProjectMonitor::class);
-
-        return $repository->findAll();
 
     }
 }
