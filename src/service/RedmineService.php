@@ -25,7 +25,7 @@ class RedmineService
 
     public function createProject(Redmine $redmine): array
     {
-//
+
 //        echo "--->".$this->redmineUrl;
 //        exit;
         $response = $this->client->post('projects.json', [
@@ -54,10 +54,15 @@ class RedmineService
         foreach ($projects as $project) {
 
             $redmineProject = new Redmine();
-            $redmineProject->setName($project->libelle);
-            $redmineProject->setDescription($project->description);
-            $redmineProject->setIdentifier($project->key);
-            $redmineProject->setIsPublic($project->actif);
+            $redmineProject->setName($project->getLibelle);
+            $redmineProject->setDescription($project->getDescription);
+            $redmineProject->setIdentifier($project->getKey);
+            $redmineProject->setIsPublic($project->getActif);
+//
+//            $redmineProject->setName($project->libelle);
+//            $redmineProject->setDescription($project->description);
+//            $redmineProject->setIdentifier($project->key);
+//            $redmineProject->setIsPublic($project->actif);
 
             $returnedData[] = $redmineProject;
         }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ProjectMonitor
 {
 
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

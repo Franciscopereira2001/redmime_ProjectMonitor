@@ -12,6 +12,8 @@ class Redmine
     private $name;
 
     /**
+     * @ORM\Identifier
+     * @ORM\GeneratedValue
      * @ORM\Column(type="string", length=255)
      */
     private $identifier;
