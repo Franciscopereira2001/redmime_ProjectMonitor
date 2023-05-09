@@ -62,7 +62,7 @@ class Redmine
      */
     public function setIdentifier($identifier): void
     {
-        $this->identifier = $identifier;
+        $this->identifier = "pm_id_".strtolower($identifier);
     }
 
     /**
