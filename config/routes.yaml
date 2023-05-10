@@ -1,9 +1,5 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
-
 api_create_project:
     path: /create-project
-    controller: App\Controller\ApiController::randomName
+    controller: App\Controller\ApiController::createProject
+    methods:
+        - POST

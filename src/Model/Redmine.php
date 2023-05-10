@@ -1,6 +1,6 @@
 <?php
 
-namespace App\model;
+namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,12 +26,7 @@ class Redmine
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_public;
-
-    public function __construct()
-    {
-        // construtor vazio
-    }
+    private $isPublic;
 
     /**
      * @return mixed
@@ -86,14 +81,14 @@ class Redmine
      */
     public function getIsPublic()
     {
-        return $this->is_public;
+        return $this->isPublic;
     }
 
     /**
-     * @param mixed $is_public
+     * @param mixed $isPublic
      */
-    public function setIsPublic($is_public): void
+    public function setIsPublic($isPublic): void
     {
-        $this->is_public = $is_public;
+        $this->isPublic = $isPublic;
     }
 }
