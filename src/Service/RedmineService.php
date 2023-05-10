@@ -1,10 +1,9 @@
 <?php
 
-namespace App\service;
+namespace App\Service;
 
-use App\model\ProjectMonitor;
-use App\model\Redmine;
-use App\service\ProjectMonitorService;
+use App\Model\ProjectMonitor;
+use App\Model\Redmine;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -24,14 +23,10 @@ class RedmineService
         $this->projectMonitorService = $projectMonitorService;
     }
 
-    public function createProject(Redmine $redmine)
+    public function createProject(Redmine $redmine): array
     {
-
-//        echo "--->".$this->redmineUrl;
-//        exit;
-//        dd($redmine);
         try {
-            $response = $this->client->post('projects.json', [
+            $this->client->post('projects.json', [
                 'headers' => [
                     'X-Redmine-API-Key' => $this->apiKey,
                     'Content-Type' => 'application/json',
@@ -58,35 +53,28 @@ class RedmineService
 //                "error" => $exception->getCode()
 //            ];
         }
-
-
     }
 
     public function createProjectMonitorProjectsInRedmine():array
     {
         //Obtem todos os projetos do Project Monitor
         $projects = $this->projectMonitorService->getAllProjects();
-        $errors = [];
-        foreach ($projects as $project) {
 
+        $errors = [];
+
+        /** @var ProjectMonitor $project */
+        foreach ($projects as $project) {
             $redmineProject = new Redmine();
 
-            //usado quando e para obter os dados de um array
-            $redmineProject->setName($project["libelle"]);
-            $redmineProject->setDescription($project["description"]);
-            $redmineProject->setIdentifier($project["key"]);
-            $redmineProject->setIsPublic($project["actif"]);
+            $redmineProject->setName($project->getLibelle());
+            $redmineProject->setDescription($project->getDescription());
+            $redmineProject->setIdentifier($project->getKey());
+            $redmineProject->setIsPublic($project->getActif());
 
-//            usado quando e para ler de um objeto
-//            $redmineProject->setName($project->libelle);
-//            $redmineProject->setDescription($project->description);
-//            $redmineProject->setIdentifier($project->key);
-//            $redmineProject->setIsPublic($project->actif);
+            $redmineCreated = $this->createProject($redmineProject);
 
-            $return = $this->createProject($redmineProject);
-
-            if (isset($return["error"])) {
-                $errors[] = $return;
+            if (isset($redmineCreated["error"])) {
+                $errors[] = $redmineCreated;
             }
         }
 

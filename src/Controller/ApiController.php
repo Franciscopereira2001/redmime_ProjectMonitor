@@ -2,31 +2,26 @@
 
 namespace App\Controller;
 
-use App\model\ProjectMonitor;
-use App\model\Redmine;
-use App\service\RedmineService;
-use App\service\ProjectMonitorService;
-use Psr\Container\ContainerInterface;
+use App\Service\RedmineService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class ApiController extends AbstractController
 {
-    private $redmineService;
-
+    private RedmineService $redmineService;
 
     public function __construct(RedmineService $redmineService)
     {
         $this->redmineService = $redmineService;
     }
 
-    public function randomName()
+    public function createProject(): Response
     {
        $projects = $this->redmineService->createProjectMonitorProjectsInRedmine();
 
-       return new Response(json_encode($projects),200);
+       return new Response(
+           json_encode($projects),
+           Response::HTTP_OK
+       );
     }
-
-
 }
