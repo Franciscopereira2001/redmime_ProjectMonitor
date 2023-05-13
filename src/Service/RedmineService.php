@@ -46,7 +46,7 @@ class RedmineService
 //            dd($exception->getMessage());
             return [
                 "message" => sprintf("O projeto %s ja existe", $redmine->getIdentifier()),
-                "error" => $exception->getCode()
+                "error_code" => $exception->getCode()
             ];
 //            return [
 //                "messages" => $exception->getMessage(),
@@ -73,11 +73,11 @@ class RedmineService
 
             $redmineCreated = $this->createProject($redmineProject);
 
-            if (isset($redmineCreated["error"])) {
+            if (isset($redmineCreated["error_code"])) {
                 $errors[] = $redmineCreated;
             }
         }
 
-        return ["message" => "Operacao concluida.", "errors" => $errors];
+        return ["errors" => $errors];
     }
 }

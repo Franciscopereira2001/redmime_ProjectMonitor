@@ -17,11 +17,11 @@ class ApiController extends AbstractController
 
     public function createProject(): Response
     {
-       $projects = $this->redmineService->createProjectMonitorProjectsInRedmine();
+       $errors = $this->redmineService->createProjectMonitorProjectsInRedmine();
 
        return new Response(
-           json_encode($projects),
-           Response::HTTP_OK
+           json_encode($errors),
+           isset($errors["errors"]) ? Response::HTTP_BAD_REQUEST : Response::HTTP_CREATED
        );
     }
 }
