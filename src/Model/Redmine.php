@@ -2,92 +2,60 @@
 
 namespace App\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-
 class Redmine
 {
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
 
-    /**
-     * @ORM\Identifier
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="string", length=255)
-     */
-    private $identifier;
+    private string $name;
+
+
+    private string $identifier;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private string $description;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublic;
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    private bool $isPublic;
+
+
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
-    /**
-     * @param mixed $identifier
-     */
-    public function setIdentifier($identifier): void
+    public function setIdentifier(string $identifier): void
     {
         $this->identifier = "pm_id_".strtolower($identifier);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param mixed $description
-     */
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsPublic()
+    public function getIsPublic(): bool
     {
         return $this->isPublic;
     }
 
-    /**
-     * @param mixed $isPublic
-     */
-    public function setIsPublic($isPublic): void
+    public function setIsPublic(bool $isPublic): void
     {
         $this->isPublic = $isPublic;
     }
