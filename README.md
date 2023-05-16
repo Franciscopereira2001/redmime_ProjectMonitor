@@ -24,6 +24,8 @@
 
 </details>
 
+## Documentation
+
 #### Model
 
 ![Class diagram](docs/Diagrama_classes.png)
