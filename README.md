@@ -23,3 +23,11 @@
 > | `400`         | `application/json`  | `{"errors": [{"message": "", "error_code": ""}]}` |
 
 </details>
+
+#### Model
+
+![Class diagram](docs/Diagrama_classes.png)
+
+#### Sequence
+
+![Sequence diagram](docs/Diagrama_sequencia.png)
